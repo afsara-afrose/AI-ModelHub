@@ -1,10 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { AuthContext } from './AuthContext';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
+import { auth } from '../firebase/firebase.config';
 
-const AuthProvider = () => {
-    return (
-        <div>
-             
-        </div>
-    );
+
+const AuthProvider = ({children}) => {
+    const [user,setUser]=useState(null)
+
+    //  Create User
+    const createUserWithEmailAndPasswordFunc=(email,password)=>{
+        return createUserWithEmailAndPassword(auth, email, password)
+    }
+    //  signIn User
+     const  signInWithEmailAndPasswordFunc=( email, password)=>{
+        return  signInWithEmailAndPassword(auth, email, password)
+
+     }
+     //Update Profile
+       const UpdateProfileFunc=(displayName,photoURL)=>{
+        return updateProfile(auth.currentUser,{
+               displayName,
+                photoURL,
+             })
+       }
+     //SignOut User
+     const signoutUserFunc=()=>{
+        return signOut(auth)
+     }
+     useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+    const authInfo={
+        user,
+        setUser,
+        createUserWithEmailAndPasswordFunc,
+        signInWithEmailAndPasswordFunc,
+        UpdateProfileFunc,
+        signoutUserFunc,
+        
+    }
+    return <AuthContext value={authInfo} >{children}</AuthContext>
+};
 
 export default AuthProvider;

@@ -1,11 +1,28 @@
-import React from "react";
-
+import React, { useContext, useState } from "react";
 import logo from '../assets/generative-image.png'
 import { NavLink } from "react-router";
+import { AuthContext } from "../context/AuthContext";
+import { Link, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+    const navigate = useNavigate();
+  const {user,signoutUserFunc}=useContext(AuthContext)
+  const[open,setOpen]=useState(false)
+  
+
+  const handleLogOut =(e)=>{
+    e.preventDefault()
+    signoutUserFunc()
+    .then(() => {
+        setOpen(false);
+         navigate("/login");
+      })
+      .catch((err) => 
+        toast.error(err.message)
+  )}
   return (
-    <div className="navbar bg-base-100 shadow-md sticky top-0 z-50 backdrop-blur-lg bg-opacity-90">
+    <div className="navbar flex justify-between items-center  bg-base-100 shadow-md sticky top-0 z-50 backdrop-blur-lg bg-opacity-90">
       {/* LEFT */}
       
       <div className="navbar-start">
@@ -37,7 +54,7 @@ const Navbar = () => {
         </div>
 
         {/* Logo */}
-        <div classNme='flex justify-between gap-5'>
+        <div className='flex justify-between gap-5'>
            
           <NavLink to="/" className="btn btn-ghost text-2xl font-bold text-primary">
           <img  className='w-[55px]' src={logo} alt="" />
@@ -49,7 +66,7 @@ const Navbar = () => {
 
       {/* CENTER (Desktop Menu) */}
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 text-lg font-medium">
+        <ul className="menu menu-horizontal px-1 text-lg font-semibold">
           <li>
             <NavLink
               to="/"
@@ -86,10 +103,76 @@ const Navbar = () => {
       </div>
 
       {/* RIGHT */}
-      <div className="navbar-end gap-2">
-        <NavLink to='/login' className="btn btn-outline btn-primary">Login</NavLink>
-      </div>
-    </div>
+       {/* If user LOGGED IN */}
+       <div className='navbar-end'>
+        {user ? (
+            <div className="relative">
+              <img
+                src={user.photoURL|| "https://i.ibb.co/YPMBvYQ/default-user.png"}
+                alt="profile"
+                className="w-10 h-10 rounded-full cursor-pointer border"
+                onClick={() => setOpen(!open)}
+              />
+
+              {/* Dropdown */}
+              {open && (
+                <div className="absolute right-0 top-12 bg-white shadow-lg border rounded-lg w-56 p-4 z-50">
+
+                  <div className="mb-3">
+                    <p className="font-semibold text-gray-700">{user.displayName}</p>
+                    <p className="text-sm text-gray-500">{user.email}</p>
+                  </div>
+
+                  <hr className="my-2" />
+
+                  <ul className="space-y-2">
+                    <li>
+                      <Link
+                        to="/model-purchase"
+                        className="block px-3 py-2 hover:bg-gray-100 rounded"
+                        onClick={() => setOpen(false)}
+                      >
+                        Model Purchase
+                      </Link>
+                    </li>
+
+                    <li>
+                      <Link
+                        to="/my-model"
+                        className="block px-3 py-2 hover:bg-gray-100 rounded"
+                        onClick={() => setOpen(false)}
+                      >
+                        My Models
+                      </Link>
+                    </li>
+
+                    <li>
+                      <button
+                        onClick={handleLogOut }
+                        className="w-full text-left px-3 py-2 hover:bg-blue-200 text-purple-600 rounded"
+                      >
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
+          ):(
+         
+            <Link
+              to="/login"
+              className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600"
+            >
+              Login
+            </Link>
+          )}
+             
+       </div>    
+          
+          </div>
+
+     
   );
 };
 

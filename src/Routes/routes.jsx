@@ -5,6 +5,8 @@ import AddModel from "../Pages/AddModel";
 import AllModel from "../Pages/AllModel";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import ModelPurchase from "../Pages/ModelPurchase";
+import MyModel from "../Pages/MyModel";
 
 export const router = createBrowserRouter([
   {
@@ -33,7 +35,14 @@ export const router = createBrowserRouter([
         {
             path:'/register',
             element:<Register></Register>
-        }
+        },{
+            path:'/model-purchase',
+            element:<ModelPurchase></ModelPurchase>,
+        },
+        {
+            path:'/my-model',
+            element:<MyModel></MyModel>
+        },
     ]
   },
 ]);

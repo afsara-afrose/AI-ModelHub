@@ -1,89 +1,150 @@
-import React from 'react';
-import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router';
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import React, { useState, useContext } from "react";
+import { FcGoogle } from "react-icons/fc";
+import { Link, useNavigate } from "react-router";
+import { auth } from "../firebase/firebase.config";
+import { toast } from "react-toastify";
+import MyContainer from "../Components/MyContainer";
+import { FaEye } from "react-icons/fa";
+import { IoEyeOff } from "react-icons/io5";
+import { AuthContext } from "../context/AuthContext";
+
+const provider = new GoogleAuthProvider();
 
 const Register = () => {
+  const navigate = useNavigate();
+  const [showPass, setShowPass] = useState(false);
 
-    const handleRegister=(e)=>{
-        e.preventDefault()
+  const { createUserWithEmailAndPasswordFunc, UpdateProfileFunc } =
+    useContext(AuthContext);
 
-        const displayName =e.target.displayName.value;
-        const email =e.target.email.value;
-        const photo =e.target.photo.value;
-        const password =e.target.password.value;
+  const handleRegister = (e) => {
+    e.preventDefault();
 
-        console.log(displayName,email,photo,password)
+    const displayName = e.target.displayName.value;
+    const email = e.target.email.value;
+    const photoURL = e.target.photoURL.value;
+    const password = e.target.password.value;
 
-
+    // validation
+    if (password.length < 6) {
+      toast.error("Password should be at least 6 characters");
+      return;
     }
-    return (
-        <div className="card bg-base-100 mt-10 w-full mx-auto max-w-sm shrink-0 shadow-2xl border border-gray-200">
-              <div className="card-body">
-                <h1 className="text-3xl font-bold text-center">Register</h1>
-                <form onSubmit={handleRegister}>
-                  <fieldset className="fieldset">
 
-                   {/* User DisplayName */}
-                   <label className="label">Name</label>
-                    <input
-                      type="text"
-                      name="displayName"
-                      className="input rounded-full focus:border-0 focus:outline-gray-200"
-                      placeholder="Your Name"
-                    />
-                    {/* Email */}
-           
-                    <label className="label">Email</label>
-                    <input
-                      type="email"
-                      name="email"
-                      className="input rounded-full focus:border-0 focus:outline-gray-200"
-                      placeholder="Email"
-                    />
-                    {/* photoUrl */}
-                    <label className="label">PhotoURL</label>
-                    <input
-                      type="text"
-                      name="photo"
-                      className="input rounded-full focus:border-0 focus:outline-gray-200"
-                      placeholder="photoUrl"
-                    />
-                    {/* Password */}
-        
-                    <label className="label">Password</label>
-                    <input
-                      type="password"
-                      name="password"
-                       className="input rounded-full focus:border-0 focus:outline-gray-200"
-                      placeholder="Password"
-                    />
-                    <div>
-                      <a className="link link-hover">Forgot password?</a>
-                    </div>
-                    <button className="my-btn ">
-                      Login
-                    </button>
-                  </fieldset>
-                </form>
-        
-                <button
-                  
-                  className="btn bg-white rounded-full text-black border-[#e5e5e5]"
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z]).+$/;
+    if (!passwordRegex.test(password)) {
+      toast.error("Password must contain uppercase & lowercase letters");
+      return;
+    }
+
+    // create user
+    createUserWithEmailAndPasswordFunc(email, password)
+      .then((res) => {
+        console.log(res);
+
+        // update profile
+        UpdateProfileFunc(displayName, photoURL)
+          .then(() => {
+            toast.success("Profile updated");
+          })
+          .catch(() => 
+            toast.error('profile is not updated yeat'));
+      })
+      .catch((error) => {
+        if (error.code === "auth/email-already-in-use") {
+          toast.error("Email already in use");
+        } else {
+          toast.error(error.message);
+        }
+      });
+  };
+
+  // google sign in
+  const handleGoogleSignIn = () => {
+    signInWithPopup(auth, provider)
+      .then(() => {
+        toast.success("Google Sign-In Successful");
+        navigate("/");
+      })
+      .catch(() => {
+        toast.error("Google Sign-In Failed");
+      });
+  };
+
+  return (
+    <div className="card bg-base-100 mt-10 w-full mx-auto max-w-sm shrink-0 shadow-2xl border border-gray-200">
+      <MyContainer>
+        <div className="card-body">
+          <h1 className="text-2xl font-bold text-center">
+            <span className="text-purple-600">Register</span> for AI
+            <span className="text-blue-500"> Model Inventory Manager</span>
+          </h1>
+
+          <form onSubmit={handleRegister}>
+            <fieldset className="fieldset">
+              <label className="label">Name</label>
+              <input
+                type="text"
+                name="displayName"
+                className="input rounded-full"
+                placeholder="Your Name"
+              />
+
+              <label className="label">Email</label>
+              <input
+                type="email"
+                name="email"
+                className="input rounded-full"
+                placeholder="Email"
+              />
+
+              <label className="label">PhotoURL</label>
+              <input
+                type="text"
+                name="photoURL"
+                className="input rounded-full"
+                placeholder="Photo URL"
+              />
+
+              <div className="relative">
+                <label className="label">Password</label>
+                <input
+                  type={showPass ? "text" : "password"}
+                  name="password"
+                  className="input rounded-full"
+                  placeholder="Password"
+                />
+                <span
+                  onClick={() => setShowPass(!showPass)}
+                  className="absolute right-[28px] top-[30px] cursor-pointer text-xl"
                 >
-                 <FcGoogle/>
-                  Login with Google
-                </button>
-                <p className="text-center">
-                  Already Have an Account? Please  <Link
-                    className="text-blue-500 hover:text-blue-800"
-                    to="/login"
-                  >
-                     Login
-                  </Link>
-                </p>
+                  {showPass ? <FaEye /> : <IoEyeOff />}
+                </span>
               </div>
-              </div>
-    );
+
+              <button className="my-btn mt-4">Register</button>
+            </fieldset>
+          </form>
+
+          <button
+            type="button"
+            onClick={handleGoogleSignIn}
+            className="btn bg-white rounded-full text-black border-[#e5e5e5]"
+          >
+            <FcGoogle /> Login with Google
+          </button>
+
+          <p className="text-center">
+            Already have an account?{" "}
+            <Link className="text-blue-500 hover:text-blue-800" to="/login">
+              Login
+            </Link>
+          </p>
+        </div>
+      </MyContainer>
+    </div>
+  );
 };
 
 export default Register;
