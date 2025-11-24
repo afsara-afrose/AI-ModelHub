@@ -92,13 +92,13 @@ const Login = () => {
             <div>
               <a className="link link-hover">Forgot password?</a>
             </div>
-            <button className="my-btn ">Login</button>
+            <button className="my-btn p-2 ">Login</button>
           </fieldset>
         </form>
 
         <button
           onClick={handleGoogleSignIn}
-          className="btn bg-white rounded-full text-black border-[#e5e5e5]"
+          className="btn  bg-white rounded-full text-black border-[#e5e5e5]"
         >
           <FcGoogle />
           Login with Google

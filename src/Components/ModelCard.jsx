@@ -23,7 +23,7 @@ const ModelCard = ({ model }) => {
       </p>
 
       <Link
-        to={`/models/${_id}`}
+        to={`/model-details/${_id}`}
         className="inline-block card-btn text-white px-4 py-2 rounded-lg mt-2 hover:bg-blue-700"
       >
         View Details

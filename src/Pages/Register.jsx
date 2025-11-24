@@ -123,7 +123,7 @@ const Register = () => {
                 </span>
               </div>
 
-              <button className="my-btn mt-4">Register</button>
+              <button className="my-btn p-2 mt-4">Register</button>
             </fieldset>
           </form>
 

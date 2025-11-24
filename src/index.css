@@ -8,7 +8,7 @@
 }
 
 .my-btn {
-  @apply text-white  rounded-full btn bg-gradient-to-r from-blue-500 via-purple-500 to-blue-400 font-semibold border-none hover:scale-110 transition-transform duration-200;
+  @apply text-white  rounded-full  bg-gradient-to-r from-blue-500 via-purple-500 to-blue-400 font-semibold border-none hover:scale-110 transition-transform duration-200;
 }
 
 .card-btn {

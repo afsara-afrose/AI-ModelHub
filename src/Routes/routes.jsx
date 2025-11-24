@@ -7,43 +7,61 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import ModelPurchase from "../Pages/ModelPurchase";
 import MyModel from "../Pages/MyModel";
+import PrivateRoute from "../Components/PrivateRoute";
+import ModelDetails from "../Pages/ModelDetails";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
-    children:[
-        {
-            index:true,
-            element:<Home></Home>,
+    children: [
+      {
+        index: true,
+        element: <Home></Home>,
+      },
+      {
+        path: "/add-model",
 
-        },
-        {
-            path:'/add-model',
-            element:<AddModel></AddModel>,
+        element: (
+          <PrivateRoute>
+            <AddModel></AddModel>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/all-model",
+        element: <AllModel></AllModel>,
+        loader: () => fetch("http://localhost:3000/models"),
+      },
+      {
+        path:'/model-details',
+        element:(
+            <PrivateRoute>
+                <ModelDetails>
 
-        },
-        {
-            path:'/all-model',
-            element:<AllModel></AllModel>,
-            loader:()=>fetch('http://localhost:3000/models')
+                </ModelDetails>
 
-        },
-        {
-            path:'/login',
-            element:<Login></Login>,
-        },
-        {
-            path:'/register',
-            element:<Register></Register>
-        },{
-            path:'/model-purchase',
-            element:<ModelPurchase></ModelPurchase>,
-        },
-        {
-            path:'/my-model',
-            element:<MyModel></MyModel>
-        },
-    ]
+            </PrivateRoute>
+        ),
+        //loader:({params}=>fetch(``))
+
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
+      {
+        path: "/model-purchase",
+        element: <ModelPurchase></ModelPurchase>,
+      },
+      {
+        path: "/my-model",
+        element: <MyModel></MyModel>,
+      },
+    ],
   },
 ]);
