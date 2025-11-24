@@ -26,6 +26,7 @@ export const router = createBrowserRouter([
         {
             path:'/all-model',
             element:<AllModel></AllModel>,
+            loader:()=>fetch('http://localhost:3000/models')
 
         },
         {

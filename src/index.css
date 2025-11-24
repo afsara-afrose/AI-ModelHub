@@ -1,14 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
 
 @import "tailwindcss";
 @plugin "daisyui";
 
-
 * {
-     font-family: "Lora", serif;
+  font-family: "Lora", serif;
 }
 
 .my-btn {
-    @apply text-white  rounded-full btn bg-gradient-to-r from-blue-500 via-purple-500 to-blue-400 font-semibold border-none hover:scale-110 transition-transform duration-200;
+  @apply text-white  rounded-full btn bg-gradient-to-r from-blue-500 via-purple-500 to-blue-400 font-semibold border-none hover:scale-110 transition-transform duration-200;
 }
 
+.card-btn {
+  @apply text-white  rounded btn bg-gradient-to-r from-purple-400 via-blue-400 to-purple-500 font-semibold border-none hover:scale-110 transition-transform duration-200;
+}
