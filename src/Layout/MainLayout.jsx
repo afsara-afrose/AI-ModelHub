@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../Components/Navbar";
 import { Outlet } from "react-router";
 import MyContainer from "../Components/MyContainer";
+import FooterSection from "../Components/Footer/FooterSection";
 
 
 const MainLayout = () => {
@@ -16,7 +17,7 @@ const MainLayout = () => {
         </MyContainer>
       </main>
       
-        
+        <FooterSection></FooterSection>
      
     </div>
   );
