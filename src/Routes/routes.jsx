@@ -9,6 +9,7 @@ import ModelPurchase from "../Pages/ModelPurchase";
 import MyModel from "../Pages/MyModel";
 import PrivateRoute from "../Components/PrivateRoute";
 import ModelDetails from "../Pages/ModelDetails";
+import UpdateModel from "../Pages/UpdateModel";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,15 @@ export const router = createBrowserRouter([
             <ModelDetails></ModelDetails>
           </PrivateRoute>
         ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/models/${params.id}`),
+      },
+      {
+        path:'/update-model/:id',
+        element:
+        <PrivateRoute>
+          <UpdateModel></UpdateModel>
+        </PrivateRoute>,
         loader: ({ params }) =>
           fetch(`http://localhost:3000/models/${params.id}`),
       },

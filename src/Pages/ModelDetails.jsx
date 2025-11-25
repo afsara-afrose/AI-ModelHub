@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import MyContainer from '../Components/MyContainer';
 
 const ModelDetails = () => {
@@ -72,6 +72,11 @@ const ModelDetails = () => {
         <p>
           <span className="font-semibold">Created By:</span> {model.createdBy}
         </p>
+      </div>
+      {/* Button */}
+      <div className='flex justify-between gap-4 mt-8'>
+        <Link to={`/update-model/${model._id}`} className='card-btn'>Edit Model Details</Link>
+        <button className='card-btn'>Delete</button>
       </div>
     </div>
 
