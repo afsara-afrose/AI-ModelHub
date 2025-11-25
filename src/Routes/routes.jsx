@@ -15,10 +15,12 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    
     children: [
       {
         index: true,
         element: <Home></Home>,
+        loader:()=>fetch('http://localhost:3000/latest-models'),
       },
       {
         path: "/add-model",
