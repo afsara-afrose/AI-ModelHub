@@ -3,12 +3,33 @@ import { Link, useLoaderData, useNavigate } from "react-router";
 import MyContainer from "../Components/MyContainer";
 import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 const ModelDetails = () => {
   const { user } = useContext(AuthContext);
   const data = useLoaderData();
   const model = data.result;
   const navigate = useNavigate();
+
+
+  const handlePurchase=()=>{
+
+    fetch(`http://localhost:3000/model-purchase`,{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json",
+        },
+        body:JSON.stringify({...model,createdBy:user.email})
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        console.log(data)
+        toast.success('Successfully Purchased')
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+  }
   const handleDelete = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -111,6 +132,7 @@ const ModelDetails = () => {
             <Link to={`/update-model/${model._id}`} className="card-btn">
               Edit Model Details
             </Link>
+            <Link to={`/purchase-model/${model._id}`} onClick={handlePurchase} className='card-btn'>Purchase</Link>
 
             <button onClick={handleDelete} className="card-btn">
               Delete
