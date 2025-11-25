@@ -34,17 +34,14 @@ export const router = createBrowserRouter([
         loader: () => fetch("http://localhost:3000/models"),
       },
       {
-        path:'/model-details',
-        element:(
-            <PrivateRoute>
-                <ModelDetails>
-
-                </ModelDetails>
-
-            </PrivateRoute>
+        path: "/model-details/:id",
+        element: (
+          <PrivateRoute>
+            <ModelDetails></ModelDetails>
+          </PrivateRoute>
         ),
-        //loader:({params}=>fetch(``))
-
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/models/${params.id}`),
       },
       {
         path: "/login",
