@@ -52,10 +52,16 @@ const Navbar = () => {
               <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <NavLink to="/add-model">Add New Model</NavLink>
+              <NavLink to="/add-model">Add  Model</NavLink>
             </li>
             <li>
-              <NavLink to="/all-model">Manage Models</NavLink>
+              <NavLink to="/all-model">All Models</NavLink>
+            </li>
+            <li>
+              <NavLink to="/my-model">My Model</NavLink>
+            </li>
+            <li>
+              <NavLink to="/model-purchase">My Model Purchase</NavLink>
             </li>
           </ul>
         </div>
@@ -68,7 +74,8 @@ const Navbar = () => {
           >
             <img className="w-[55px]" src={logo} alt="" />
             <h1>
-              AI <span className="text-black">Model</span>Hub
+              AI <br />
+              <span className="text-black">Model</span>Hub
             </h1>
           </NavLink>
         </div>
@@ -107,6 +114,26 @@ const Navbar = () => {
               }
             >
               All Models
+            </NavLink>
+          </li>
+           <li>
+            <NavLink
+              to="/my-model"
+              className={({ isActive }) =>
+                isActive ? "text-primary font-semibold" : ""
+              }
+            >
+              My Model
+            </NavLink>
+          </li>
+           <li>
+            <NavLink
+              to="/model-purchase"
+              className={({ isActive }) =>
+                isActive ? "text-primary font-semibold" : ""
+              }
+            >
+              My Model Purchase
             </NavLink>
           </li>
         </ul>

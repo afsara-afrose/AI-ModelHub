@@ -1,11 +1,13 @@
 import React from "react";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import MyContainer from "../Components/MyContainer";
+import { toast } from "react-toastify";
 
 const UpdateModel = () => {
   const data = useLoaderData();
   const model = data.result;
   console.log(model);
+  const navigate=useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,14 +16,29 @@ const UpdateModel = () => {
       name: e.target.name.value,
       image: e.target.image.value,
       framework: e.target.framework.value,
-      seCase:e.target.seCase.value,
+      useCase:e.target.useCase.value,
       dataset:e.target.dataset.value,
-      category: e.target.category.value,
       description: e.target.description.value,
-
       created_at: new Date(),
     };
     console.log(formData);
+    fetch(`http://localhost:3000/update-model/${model._id}`,{
+        method:'PUT',
+        headers:{
+            "Content-Type":"application/json",
+        },
+        body:JSON.stringify(formData)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        console.log(data)
+        toast.success('Model Updated Successfully')
+        navigate(`/model-details/${model._id}`)
+    })
+    .catch(err=>{
+        console.log(err)
+        toast.error('something is wrong! Check your update model page ')
+    })
   };
   return (
     <MyContainer>
@@ -30,9 +47,9 @@ const UpdateModel = () => {
       </h1>
 
       <form
-        onSubmit={handleSubmit} // your submit handler
-        className="max-w-4xl mx-auto mt-10 p-8 bg-red-50 shadow-xl rounded-2xl border border-gray-200 space-y-6"
-      >
+        onSubmit={handleSubmit} 
+        className="max-w-4xl mx-auto mt-10 p-8 bg-red-50 shadow-xl rounded-2xl border border-gray-200 space-y-6" 
+         >
         {/* TITLE */}
         <div>
           <label className="block font-semibold text-gray-700 mb-1">
