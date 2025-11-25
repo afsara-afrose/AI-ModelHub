@@ -49,7 +49,6 @@ export const router = createBrowserRouter([
         element:
         <PrivateRoute>
           <UpdateModel>
-            
           </UpdateModel>
         </PrivateRoute>,
         loader: ({ params }) =>
@@ -64,7 +63,7 @@ export const router = createBrowserRouter([
         element: <Register></Register>,
       },
       {
-        path: "/purchase-model/:id",
+        path: "/model-purchase",
         element:<PrivateRoute>
            <ModelPurchase></ModelPurchase>
         </PrivateRoute>,

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLoaderData, useNavigate } from "react-router";
 import MyContainer from "../Components/MyContainer";
 import Swal from "sweetalert2";
@@ -10,26 +10,47 @@ const ModelDetails = () => {
   const data = useLoaderData();
   const model = data.result;
   const navigate = useNavigate();
+  const [setRefetch]=useState(false)
 
 
-  const handlePurchase=()=>{
+  const handlePurchase = () => {
+  if (!user?.email)
+    return toast.error("Please login first");
 
-    fetch(`http://localhost:3000/model-purchase`,{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json",
-        },
-        body:JSON.stringify({...model,createdBy:user.email})
+  const finalModel = {
+    _id: model._id,  
+    name: model.name,
+    image: model.image,
+    framework: model.framework,
+    useCase: model.useCase,
+    createdBy: model.createdBy,
+    purchasedBy: user.email,
+  };
+
+  fetch(`http://localhost:3000/model-purchase/${model._id}`, {   
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(finalModel)
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      toast.success("Successfully Purchased");
+
+      // frontend UI increment
+      model.purchased += 1;
+
+      // just for rerender
+      setRefetch(prev => !prev);
     })
-    .then(res=>res.json())
-    .then(data=>{
-        console.log(data)
-        toast.success('Successfully Purchased')
-    })
-    .catch(err=>{
-        console.log(err)
-    })
-  }
+    .catch(err => {
+      console.log(err);
+      toast.error("Purchase Failed!");
+    });
+};
+
   const handleDelete = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -132,7 +153,7 @@ const ModelDetails = () => {
             <Link to={`/update-model/${model._id}`} className="card-btn">
               Edit Model Details
             </Link>
-            <Link to={`/purchase-model/${model._id}`} onClick={handlePurchase} className='card-btn'>Purchase</Link>
+            <button onClick={handlePurchase} className='card-btn'>Purchase Model</button>
 
             <button onClick={handleDelete} className="card-btn">
               Delete
