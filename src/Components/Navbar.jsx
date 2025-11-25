@@ -11,6 +11,11 @@ const Navbar = () => {
   const { user, signoutUserFunc } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
 
+  const handleThemeToggle = (e) => {
+    const theme = e.target.checked ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", theme);
+  };
+
   const handleLogOut = (e) => {
     e.preventDefault();
     signoutUserFunc()
@@ -21,7 +26,7 @@ const Navbar = () => {
       .catch((err) => toast.error(err.message));
   };
   return (
-    <div className="navbar flex justify-between items-center  bg-base-100 shadow-md sticky top-0 z-50 backdrop-blur-lg bg-opacity-90">
+    <div className="navbar flex justify-between items-center text-[#1a1a1a]  bg-[#eee] shadow-md sticky top-0 z-50 backdrop-blur-lg bg-opacity-90">
       {/* LEFT */}
 
       <div className="navbar-start">
@@ -52,7 +57,7 @@ const Navbar = () => {
               <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <NavLink to="/add-model">Add  Model</NavLink>
+              <NavLink to="/add-model">Add Model</NavLink>
             </li>
             <li>
               <NavLink to="/all-model">All Models</NavLink>
@@ -116,7 +121,7 @@ const Navbar = () => {
               All Models
             </NavLink>
           </li>
-           <li>
+          <li>
             <NavLink
               to="/my-model"
               className={({ isActive }) =>
@@ -126,7 +131,7 @@ const Navbar = () => {
               My Model
             </NavLink>
           </li>
-           <li>
+          <li>
             <NavLink
               to="/model-purchase"
               className={({ isActive }) =>
@@ -141,7 +146,18 @@ const Navbar = () => {
 
       {/* RIGHT */}
       {/* If user LOGGED IN */}
-      <div className="navbar-end">
+      <div className="navbar-end flex gap-5">
+        <div className="md:pl-8 md:block hidden">
+          <label className="cursor-pointer grid place-items-center">
+            <input
+              type="checkbox"
+              defaultChecked={false}
+              className="toggle"
+              onChange={handleThemeToggle}
+            />
+          </label>
+        </div>
+
         {user ? (
           <div className="relative">
             <img

@@ -36,7 +36,7 @@ const AllModel = () => {
       className=" mt-10 grid 
      grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 p-4"
     >
-      <div className="text-2xl text-center font-bold w-full col-span-full">All Models</div>
+      <div className="text-2xl text-center font-bold ">All <span className='text-Purple-700'>Models</span></div>
 
       <form onSubmit={handleSearch} className="mt-5 mb-10 flex flex-col md:flex-row gap-2 justify-center w-full col-span-full">
         {/* Search */}
