@@ -30,4 +30,4 @@ AI ModelHub is a web-based platform that allows users to manage, explore, and pu
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/AI-ModelHub.git
+   git clone https://github.com/afsara-afrose/AI-ModelHub.git
