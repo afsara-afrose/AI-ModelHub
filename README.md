@@ -1,16 +1,33 @@
-# React + Vite
+# AI ModelHub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Site:** https://ai-modelhub-clientside.netlify.app/
 
-Currently, two official plugins are available:
+AI ModelHub is a web-based platform that allows users to manage, explore, and purchase AI models easily. It provides a smooth user experience for developers, researchers, and AI enthusiasts.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **User Authentication:** Sign up and login with email/password or Google authentication.  
+- **Add and Manage Models:** Users can add new AI models, update, and delete them.  
+- **Search and Filter:** Easily search for AI models by name or filter by framework.  
+- **Purchase Models:** Track and purchase AI models, view purchase history.  
+- **Responsive Design:** Works seamlessly on mobile, tablet, and desktop devices.  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Technologies Used
+
+- **Frontend:** React, TailwindCSS, React Router  
+- **Backend:** Node.js, Express  
+- **Database:** MongoDB  
+- **Authentication:** Firebase Authentication  
+- **Deployment:** Vercel (Frontend) & Backend API  
+
+---
+
+## Getting Started
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/AI-ModelHub.git
