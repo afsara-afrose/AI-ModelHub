@@ -10,11 +10,13 @@ import MyModel from "../Pages/MyModel";
 import PrivateRoute from "../Components/PrivateRoute";
 import ModelDetails from "../Pages/ModelDetails";
 import UpdateModel from "../Pages/UpdateModel";
+import ErrorPage from "../Pages/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <ErrorPage />, 
     
     children: [
       {

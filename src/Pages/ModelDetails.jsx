@@ -8,17 +8,15 @@ import { toast } from "react-toastify";
 const ModelDetails = () => {
   const { user } = useContext(AuthContext);
   const data = useLoaderData();
-  const model = data.result;
+  const [model, setModel] =useState(data.result);
   const navigate = useNavigate();
-  const [setRefetch]=useState(false)
+  
 
 
-  const handlePurchase = () => {
-  if (!user?.email)
-    return toast.error("Please login first");
+ const handlePurchase = () => {
+  if (!user?.email) return toast.error("Please login first");
 
   const finalModel = {
-    _id: model._id,  
     name: model.name,
     image: model.image,
     framework: model.framework,
@@ -27,29 +25,25 @@ const ModelDetails = () => {
     purchasedBy: user.email,
   };
 
-  fetch(`http://localhost:3000/model-purchase/${model._id}`, {   
+  fetch(`http://localhost:3000/model-purchase/${model._id}`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(finalModel)
   })
     .then(res => res.json())
     .then(data => {
-      console.log(data);
+      console.log(data)
       toast.success("Successfully Purchased");
 
-      // frontend UI increment
-      model.purchased += 1;
-
-      // just for rerender
-      setRefetch(prev => !prev);
+      // Realtime UI update
+      setModel(prev => ({ ...prev, purchased: prev.purchased + 1 }));
     })
     .catch(err => {
       console.log(err);
       toast.error("Purchase Failed!");
     });
 };
+
 
   const handleDelete = () => {
     Swal.fire({

@@ -36,7 +36,7 @@ const Home = () => {
         
       >
         <div>
-          <img  className='w-[400px] rounded-3xl items-center mx-auto' src={backgroundImg} alt="" />
+          <img  className='w-[400px] rounded-3xl items-center mx-auto transition-transform duration-300 hover:-translate-y-4' src={backgroundImg} alt="" />
         </div>
         <h2 className="text-3xl text-center font-bold text-purple-700 mb-6">
           About <span className='text-blue-400 text-4xl'> AI </span>Models
@@ -53,9 +53,9 @@ const Home = () => {
       </section>
 
       {/* Get Started / Call-to-Action */}
-      <section className=" flex gap-4 bg-gradient-to-r from-blue-200 to-indigo-300 rounded-xl p-10 text-center shadow-md mx-4 md:mx-16 mb-16">
+      <section className=" flex gap-4 bg-gradient-to-r from-blue-200 to-indigo-300 rounded-xl p-10 text-center shadow-md mx-4 md:mx-16 pb-10">
         <div>
-          <img  className='w-[350px] rounded-2xl' src={BgIMG} alt="" />
+          <img  className='w-[350px] rounded-2xl transition-transform duration-300 hover:-translate-x-3' src={BgIMG} alt="" />
 
         </div>
         <div>
@@ -73,7 +73,7 @@ const Home = () => {
 
         </div>
         <div>
-          <img className="w-[200px] rounded-2xl" src={logo} alt="" />
+          <img className="w-[200px]  rounded-2xl transition-transform duration-300 hover:-translate-y-4" src={logo} alt="" />
         </div>
       </section>
     </div>
