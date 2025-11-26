@@ -19,8 +19,8 @@ const AllModel = () => {
     if (framework) query += `&framework=${framework}`;
 
     fetch(`http://localhost:3000/search${query}`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         console.log(data);
         setModels(data);
         setLoading(false);
@@ -33,25 +33,50 @@ const AllModel = () => {
 
   return (
     <MyContainer
-      className=" mt-10 grid 
+      className="grid 
      grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 p-4"
     >
-      <div className="text-2xl text-center font-bold ">All <span className='text-Purple-700'>Models</span></div>
+      
 
-      <form onSubmit={handleSearch} className="mt-5 mb-10 flex flex-col md:flex-row gap-2 justify-center w-full col-span-full">
+        <h1 className="text-4xl mt-5 mx-auto font-bold ">All <span className="text-purple-700">Models</span></h1>
+      
+
+      <form
+        onSubmit={handleSearch}
+        className="mt-5 mb-10 flex flex-col md:flex-row gap-2 justify-center w-full col-span-full"
+      >
         {/* Search */}
         <label className="input rounded-full flex items-center w-full md:w-auto">
-          <svg className="h-[1em] opacity-50 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2.5" fill="none" stroke="currentColor">
+          <svg
+            className="h-[1em] opacity-50 mr-2"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <g
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              strokeWidth="2.5"
+              fill="none"
+              stroke="currentColor"
+            >
               <circle cx="11" cy="11" r="8"></circle>
               <path d="m21 21-4.3-4.3"></path>
             </g>
           </svg>
-          <input name="search" type="search" placeholder="Search by name" className="flex-1" />
+          <input
+            name="search"
+            type="search"
+            placeholder="Search by name"
+            className="flex-1 p-3"
+          />
         </label>
 
         {/* Framework Filter */}
-        <select value={framework} onChange={handleFrameworkChange} className="input rounded-full w-full md:w-auto">
+        <select
+          value={framework}
+          onChange={handleFrameworkChange}
+          className="input rounded-full w-full md:w-auto "
+        >
           <option value="">All Frameworks</option>
           <option value="TensorFlow">TensorFlow</option>
           <option value="PyTorch">PyTorch</option>
@@ -60,7 +85,9 @@ const AllModel = () => {
           <option value="others">others</option>
         </select>
 
-        <button className="btn btn-secondary rounded-full">{loading ? "Searching..." : "Search"}</button>
+        <button className="btn my-btn rounded-full">
+          {loading ? "Searching..." : "Search"}
+        </button>
       </form>
 
       {models.map((model) => (

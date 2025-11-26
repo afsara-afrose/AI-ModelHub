@@ -1,15 +1,15 @@
 import React from 'react';
 import { FaGithub } from 'react-icons/fa';
-import logo from "../../assets/App development-amico.png"
+import Navlogo from "../../assets/generative-image.png";
 
 const FooterSection = () => {
     return (
-        <footer className="bg-gray-900 text-white py-8 mt-10">
+        <footer className="bg-gray-900 text-white py-8 ">
             <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
         
         <div className="flex items-center space-x-3">
           <img
-            src={logo} 
+            src={Navlogo} 
             alt="AI ModelHub Logo"
             className="w-10 h-10"
           />
