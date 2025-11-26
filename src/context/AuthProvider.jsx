@@ -6,18 +6,22 @@ import { auth } from '../firebase/firebase.config';
 
 const AuthProvider = ({children}) => {
     const [user,setUser]=useState(null)
+    const [Loading,setLoading]=useState(true)
 
     //  Create User
     const createUserWithEmailAndPasswordFunc=(email,password)=>{
+      setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
     //  signIn User
      const  signInWithEmailAndPasswordFunc=( email, password)=>{
+      setLoading(true)
         return  signInWithEmailAndPassword(auth, email, password)
 
      }
      //Update Profile
        const UpdateProfileFunc=(displayName,photoURL)=>{
+        setLoading(true)
         return updateProfile(auth.currentUser,{
                displayName,
                 photoURL,
@@ -25,11 +29,13 @@ const AuthProvider = ({children}) => {
        }
      //SignOut User
      const signoutUserFunc=()=>{
+      setLoading(true)
         return signOut(auth)
      }
      useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoading(false)
     });
     return () => unsubscribe();
   }, []);

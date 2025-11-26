@@ -8,7 +8,7 @@ import MyContainer from "./MyContainer";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { user, signoutUserFunc } = useContext(AuthContext);
+  const { user, signoutUserFunc ,loading} = useContext(AuthContext);
   const [open, setOpen] = useState(false);
 
   const handleThemeToggle = (e) => {
@@ -23,7 +23,9 @@ const Navbar = () => {
         setOpen(false);
         navigate("/login");
       })
-      .catch((err) => toast.error(err.message));
+      .catch((err) => 
+        toast.error(err.message));
+      console.log(loading)
   };
   return (
     <div className="navbar flex justify-between items-center text-[#1a1a1a]  bg-[#eee] shadow-md sticky top-0 z-50 backdrop-blur-lg bg-opacity-90">
@@ -158,7 +160,9 @@ const Navbar = () => {
           </label>
         </div>
 
-        {user ? (
+        {loading?
+        (<Loader/>):
+        user ? (
           <div className="relative">
             <img
               src={user.photoURL || "https://i.ibb.co/YPMBvYQ/default-user.png"}
@@ -220,6 +224,8 @@ const Navbar = () => {
             Login
           </Link>
         )}
+        
+        
       </div>
     </div>
   );

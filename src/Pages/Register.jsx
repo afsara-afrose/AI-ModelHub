@@ -1,7 +1,7 @@
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import React, { useState, useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { auth } from "../firebase/firebase.config";
 import { toast } from "react-toastify";
 import MyContainer from "../Components/MyContainer";
@@ -13,7 +13,9 @@ const provider = new GoogleAuthProvider();
 
 const Register = () => {
   const navigate = useNavigate();
+  const location =useLocation()
   const [showPass, setShowPass] = useState(false);
+  const from = location.state?.from?.pathname || "/";
 
   const { createUserWithEmailAndPasswordFunc, UpdateProfileFunc } =
     useContext(AuthContext);
@@ -47,6 +49,7 @@ const Register = () => {
         UpdateProfileFunc(displayName, photoURL)
           .then(() => {
             toast.success("Profile updated");
+            navigate(from)
           })
           .catch(() => 
             toast.error('profile is not updated yeat'));
@@ -73,9 +76,9 @@ const Register = () => {
   };
 
   return (
-    <div className="card bg-base-100 mt-10 w-full mx-auto max-w-sm shrink-0 shadow-2xl border border-gray-200">
+    <div className="card bg-base-100  w-full mx-auto max-w-sm shrink-0 shadow-2xl border border-gray-200">
       <MyContainer>
-        <div className="card-body">
+        <div className="card-body mt-10">
           <h1 className="text-2xl font-bold text-center">
             <span className="text-purple-600">Register</span> for AI
             <span className="text-blue-500"> Model Inventory Manager</span>

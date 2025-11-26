@@ -17,7 +17,7 @@ export default function Slider() {
         <SwiperSlide>
           {" "}
           <img
-            className="w-full h-[400px] object-cover"
+            className="w-full h-[400px] object-cover rounded-xl"
             src={img1}
             alt=""
           />{" "}
@@ -25,7 +25,7 @@ export default function Slider() {
         <SwiperSlide>
           {" "}
           <img
-            className="w-full h-[400px] object-cover"
+            className="w-full h-[400px] object-cover rounded-xl"
             src={img2}
             alt=""
           />{" "}
@@ -33,7 +33,7 @@ export default function Slider() {
         <SwiperSlide>
           {" "}
           <img
-            className="w-full h-[400px] object-cover"
+            className="w-full h-[400px] object-cover rounded-xl"
             src={img3}
             alt=""
           />{" "}

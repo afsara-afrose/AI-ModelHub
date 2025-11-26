@@ -1,56 +1,65 @@
 import React, { useContext, useState } from "react";
 import { FaEye, FaGoogle } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { auth } from "../firebase/firebase.config";
 import { toast } from "react-toastify";
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { IoEyeOff } from "react-icons/io5";
 import { AuthContext } from "../context/AuthContext";
+import Loader from "../Components/Loader";
 
 const provider = new GoogleAuthProvider();
 
 const Login = () => {
   const navigate = useNavigate();
   const [showPass, setShowPass] = useState(false);
-  
+  const [loading, setLoading] = useState(false);
+  const location = useLocation();
 
-  const {signInWithEmailAndPasswordFunc}=useContext(AuthContext)
+  const from = location.state?.from?.pathname || "/";
+
+  const { signInWithEmailAndPasswordFunc } = useContext(AuthContext);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <Loader />
+      </div>
+    );
+  }
 
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
 
-    signInWithEmailAndPasswordFunc(email,password)
-      .then((res) => {
-        console.log(res);
+    setLoading(true); 
 
-        toast.success("sign in successful");
-        navigate("/");
-      })
-      .catch((error) => {
-        if (error.code === "auth/invalid-credential") {
-          toast.error("Invalid email or password");
-        }
-      });
-  };
-  //Google SignIn
-  const handleGoogleSignIn = () => {
-    signInWithPopup(auth, provider)
-      .then((res) => {
-        console.log(res.user);
-        toast.success("Google Sign-In Successful");
-        navigate("/"); // If you want redirect
+    signInWithEmailAndPasswordFunc(email, password)
+      .then(() => {
+        toast.success("Sign in successful");
+        navigate(from); 
       })
       .catch((error) => {
         console.log(error);
+        toast.error("Invalid email or password");
+      })
+      .finally(() => setLoading(false)); 
+  };
+
+  const handleGoogleSignIn = () => {
+    setLoading(true); 
+    signInWithPopup(auth, provider)
+      .then(() => {
+        toast.success("Google Sign-In Successful");
+        navigate(from);
+      })
+      .catch((err) => {
+        console.log(err);
         toast.error("Google Sign-In Failed");
-      });
+      })
+      .finally(() => setLoading(false)); 
   };
 
   return (
