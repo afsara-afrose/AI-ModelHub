@@ -9,7 +9,9 @@ const ModelPurchase = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:3000/my-purchases?email=${user.email}`)
+    fetch(
+      `https://ai-model-hub-server.vercel.app/my-purchases?email=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => setPurchasedModels(data.result || []));
   }, [user?.email]);

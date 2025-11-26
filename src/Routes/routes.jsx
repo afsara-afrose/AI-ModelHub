@@ -16,13 +16,14 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
-    errorElement: <ErrorPage />, 
-    
+    errorElement: <ErrorPage />,
+
     children: [
       {
         index: true,
         element: <Home></Home>,
-        loader:()=>fetch('http://localhost:3000/latest-models'),
+        loader: () =>
+          fetch("https://ai-model-hub-server.vercel.app/latest-models"),
       },
       {
         path: "/add-model",
@@ -36,7 +37,7 @@ export const router = createBrowserRouter([
       {
         path: "/all-model",
         element: <AllModel></AllModel>,
-        loader: () => fetch("http://localhost:3000/models"),
+        loader: () => fetch("https://ai-model-hub-server.vercel.app/models"),
       },
       {
         path: "/model-details/:id",
@@ -46,17 +47,17 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/models/${params.id}`),
+          fetch(`https://ai-model-hub-server.vercel.app/models/${params.id}`),
       },
       {
-        path:'/update-model/:id',
-        element:
-        <PrivateRoute>
-          <UpdateModel>
-          </UpdateModel>
-        </PrivateRoute>,
+        path: "/update-model/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateModel></UpdateModel>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/models/${params.id}`),
+          fetch(`https://ai-model-hub-server.vercel.app/models/${params.id}`),
       },
       {
         path: "/login",
@@ -68,16 +69,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/model-purchase",
-        element:<PrivateRoute>
-           <ModelPurchase></ModelPurchase>
-        </PrivateRoute>,
-        
+        element: (
+          <PrivateRoute>
+            <ModelPurchase></ModelPurchase>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-model",
-        element: <PrivateRoute>
-          <MyModel></MyModel>
-        </PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <MyModel></MyModel>
+          </PrivateRoute>
+        ),
       },
     ],
   },

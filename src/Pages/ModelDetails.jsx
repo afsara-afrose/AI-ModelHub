@@ -8,42 +8,42 @@ import { toast } from "react-toastify";
 const ModelDetails = () => {
   const { user } = useContext(AuthContext);
   const data = useLoaderData();
-  const [model, setModel] =useState(data.result);
+  const [model, setModel] = useState(data.result);
   const navigate = useNavigate();
-  
 
+  const handlePurchase = () => {
+    if (!user?.email) return toast.error("Please login first");
 
- const handlePurchase = () => {
-  if (!user?.email) return toast.error("Please login first");
+    const finalModel = {
+      name: model.name,
+      image: model.image,
+      framework: model.framework,
+      useCase: model.useCase,
+      createdBy: model.createdBy,
+      purchasedBy: user.email,
+    };
 
-  const finalModel = {
-    name: model.name,
-    image: model.image,
-    framework: model.framework,
-    useCase: model.useCase,
-    createdBy: model.createdBy,
-    purchasedBy: user.email,
+    fetch(
+      `https://ai-model-hub-server.vercel.app/model-purchase/${model._id}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(finalModel),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("Successfully Purchased");
+
+        // Realtime UI update
+        setModel((prev) => ({ ...prev, purchased: prev.purchased + 1 }));
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Purchase Failed!");
+      });
   };
-
-  fetch(`http://localhost:3000/model-purchase/${model._id}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(finalModel)
-  })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-      toast.success("Successfully Purchased");
-
-      // Realtime UI update
-      setModel(prev => ({ ...prev, purchased: prev.purchased + 1 }));
-    })
-    .catch(err => {
-      console.log(err);
-      toast.error("Purchase Failed!");
-    });
-};
-
 
   const handleDelete = () => {
     Swal.fire({
@@ -56,7 +56,7 @@ const ModelDetails = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/models/${model._id}`, {
+        fetch(`https://ai-model-hub-server.vercel.app/models/${model._id}`, {
           method: "Delete",
           headers: {
             "Content-Type": "application/json",
@@ -147,7 +147,9 @@ const ModelDetails = () => {
             <Link to={`/update-model/${model._id}`} className="card-btn">
               Edit Model Details
             </Link>
-            <button onClick={handlePurchase} className='card-btn'>Purchase Model</button>
+            <button onClick={handlePurchase} className="card-btn">
+              Purchase Model
+            </button>
 
             <button onClick={handleDelete} className="card-btn">
               Delete

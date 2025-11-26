@@ -31,14 +31,14 @@ const AddModel = () => {
 
     setLoading(true);
 
-    fetch("http://localhost:3000/add-model", {
+    fetch("https://ai-model-hub-server.vercel.app/add-model", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
+        console.log(data);
         toast.success("Model added successfully!");
         navigate("/all-model");
       })
@@ -49,7 +49,6 @@ const AddModel = () => {
       .finally(() => setLoading(false));
   };
 
-  
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center">
@@ -65,7 +64,6 @@ const AddModel = () => {
           <h2 className="text-2xl font-bold text-center mb-6">Add New Model</h2>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-
             <div>
               <label className="label font-medium">Model Name</label>
               <input
@@ -132,13 +130,9 @@ const AddModel = () => {
               />
             </div>
 
-            <button
-              type="submit"
-              className="btn w-full my-btn"
-            >
+            <button type="submit" className="btn w-full my-btn">
               ADD MODEL
             </button>
-
           </form>
         </div>
       </div>

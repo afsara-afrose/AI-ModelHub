@@ -19,7 +19,7 @@ const AllModel = () => {
     let query = `?search=${search_text}`;
     if (framework) query += `&framework=${framework}`;
 
-    fetch(`http://localhost:3000/search${query}`)
+    fetch(`https://ai-model-hub-server.vercel.app/search${query}`)
       .then((res) => res.json())
       .then((data) => {
         setModels(data);
