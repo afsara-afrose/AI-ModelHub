@@ -90,7 +90,7 @@ const Register = () => {
               <input
                 type="text"
                 name="displayName"
-                className="input rounded-full"
+                className="input rounded-full "
                 placeholder="Your Name"
               />
 
@@ -109,18 +109,19 @@ const Register = () => {
                 className="input rounded-full"
                 placeholder="Photo URL"
               />
+              {/* password */}
 
               <div className="relative">
                 <label className="label">Password</label>
                 <input
                   type={showPass ? "text" : "password"}
                   name="password"
-                  className="input rounded-full"
+                  className="w-full p-2 rounded-full"
                   placeholder="Password"
                 />
                 <span
                   onClick={() => setShowPass(!showPass)}
-                  className="absolute right-[28px] top-[30px] cursor-pointer text-xl"
+                  className="absolute right-[28px] top-[0px] cursor-pointer text-xl"
                 >
                   {showPass ? <FaEye /> : <IoEyeOff />}
                 </span>

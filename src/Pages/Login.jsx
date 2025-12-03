@@ -88,12 +88,12 @@ const Login = () => {
               <input
                 type={showPass ? "text" : "password"}
                 name="password"
-                className="input rounded-full focus:border-0 focus:outline-gray-200"
+                className="w-full  p-2 rounded-full"
                 placeholder="Password"
               />
               <span
                 onClick={() => setShowPass(!showPass)}
-                className="absolute right-[28px] top-[30px] cursor-pointer z-50 text-xl"
+                className="absolute right-[28px] top-[20px] cursor-pointer z-50 text-xl"
               >
                 {showPass ? <FaEye /> : <IoEyeOff />}
               </span>
