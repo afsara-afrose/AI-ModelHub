@@ -13,7 +13,7 @@ const AddModel = () => {
     e.preventDefault();
 
     if (!user) {
-      alert("Please login first!");
+      toast.error("Please login first!");
       return;
     }
 
@@ -51,17 +51,19 @@ const AddModel = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex justify-center items-center">
+      <div className="min-h-screen flex justify-center items-center px-4">
         <Loader />
       </div>
     );
   }
 
   return (
-    <div className="card bg-purple-50 border border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
-      <div className="mt-10">
-        <div className="card-body p-5 mt-10 relative">
-          <h2 className="text-2xl font-bold text-center mb-6">Add New Model</h2>
+    <div className="max-w-3xl mx-auto mt-10 px-4 sm:px-6 lg:px-8">
+      <div className="card bg-base-100 border border-base-300 shadow-2xl rounded-2xl">
+        <div className="card-body p-5">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6">
+            Add New Model
+          </h2>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
@@ -71,7 +73,7 @@ const AddModel = () => {
                 name="name"
                 placeholder="Model Name"
                 required
-                className="input w-full rounded-full focus:outline-gray-200"
+                className="input input-bordered w-full rounded-full"
               />
             </div>
 
@@ -80,9 +82,9 @@ const AddModel = () => {
               <input
                 type="text"
                 name="framework"
-                placeholder="Model FrameWork"
+                placeholder="Model Framework"
                 required
-                className="input w-full rounded-full focus:outline-gray-200"
+                className="input input-bordered w-full rounded-full"
               />
             </div>
 
@@ -93,7 +95,7 @@ const AddModel = () => {
                 name="useCase"
                 placeholder="Use-Case"
                 required
-                className="input w-full rounded-full focus:outline-gray-200"
+                className="input input-bordered w-full rounded-full"
               />
             </div>
 
@@ -104,7 +106,7 @@ const AddModel = () => {
                 name="dataset"
                 placeholder="Dataset"
                 required
-                className="input w-full rounded-full focus:outline-gray-200"
+                className="input input-bordered w-full rounded-full"
               />
             </div>
 
@@ -115,7 +117,7 @@ const AddModel = () => {
                 placeholder="description ..."
                 required
                 rows="3"
-                className="textarea w-full rounded-2xl focus:outline-gray-200 h-[200px]"
+                className="textarea textarea-bordered w-full rounded-2xl h-48"
               ></textarea>
             </div>
 
@@ -126,11 +128,11 @@ const AddModel = () => {
                 name="image"
                 placeholder="https://ibb.co/sample-image-bert-diagram"
                 required
-                className="input w-full rounded-full focus:outline-gray-200"
+                className="input input-bordered w-full rounded-full"
               />
             </div>
 
-            <button type="submit" className="btn w-full my-btn">
+            <button type="submit" className="btn btn-primary w-full mt-3">
               ADD MODEL
             </button>
           </form>

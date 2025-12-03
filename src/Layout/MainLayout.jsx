@@ -4,21 +4,20 @@ import { Outlet } from "react-router";
 import MyContainer from "../Components/MyContainer";
 import FooterSection from "../Components/Footer/FooterSection";
 
-
 const MainLayout = () => {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <header>
-        <Navbar></Navbar>
+        <Navbar />
       </header>
-      <main className="m-10">
+
+      <main className="flex-1">
         <MyContainer>
-          <Outlet></Outlet>
+          <Outlet />
         </MyContainer>
       </main>
-      
-        <FooterSection></FooterSection>
-     
+
+      <FooterSection />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { NavLink } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import MyContainer from "./MyContainer";
+
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -29,6 +29,7 @@ const Navbar = () => {
   };
   return (
     <div className="navbar flex justify-between items-center text-[#1a1a1a]  bg-[#eee] shadow-md sticky top-0 z-50 backdrop-blur-lg bg-opacity-90">
+      
       {/* LEFT */}
 
       <div className="navbar-start">
@@ -53,10 +54,11 @@ const Navbar = () => {
 
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 w-52 shadow bg-base-100 rounded-box"
+            className="menu menu-sm dropdown-content mt-3 w-52 shadow  bg-white dark:bg-gray-800 
+             text-gray-800 dark:text-gray-100 rounded-box"
           >
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/" >Home</NavLink>
             </li>
             <li>
               <NavLink to="/add-model">Add Model</NavLink>
@@ -77,13 +79,17 @@ const Navbar = () => {
         <div className="flex justify-between gap-5">
           <NavLink
             to="/"
-            className="btn btn-ghost text-2xl font-bold text-primary"
+            className="hover:bg-blue-300 hover:rounded"
           >
-            <img className="w-[55px]" src={logo} alt="" />
-            <h1>
+          
+            <div className='flex gap-3'>
+                <img className="w-[55px]" src={logo} alt="" />
+              <h1 className='font-bold'>
               AI <br />
               <span className="text-black">Model</span>Hub
             </h1>
+            </div>
+            
           </NavLink>
         </div>
       </div>
@@ -149,8 +155,9 @@ const Navbar = () => {
       {/* RIGHT */}
       {/* If user LOGGED IN */}
       <div className="navbar-end flex gap-5">
-        <div className="md:pl-8 md:block hidden">
-          <label className="cursor-pointer grid place-items-center">
+        <div className="bg-blue-700 rounded-full border-2 p-1 flex items-center justify-center 
+                w-fit mx-auto md:mx-0 md:ml-5">
+          <label className="cursor-pointer grid place-items-center ">
             <input
               type="checkbox"
               defaultChecked={false}

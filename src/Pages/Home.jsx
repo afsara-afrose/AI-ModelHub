@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <div className="min-h-screen ">
       {/* Hero / Slider */}
-      <header className="mb-12">
+      <header className="mb-12 mt-10">
         <Slider />
       </header>
 
@@ -64,7 +64,7 @@ const Home = () => {
         </div>
 
         {/* Center Text + Button */}
-        <div className="flex flex-col justify-center items-center md:items-start text-center md:text-left px-4 md:px-0 mb-6 md:mb-0">
+        <div className="flex flex-col justify-center items-center mb-10 md:items-start text-center md:text-left px-4 md:px-0 mb-6 md:mb-0">
           <h2 className="text-2xl sm:text-3xl font-bold text-black mb-4">
             Get <span className="text-blue-700">Started</span>
           </h2>

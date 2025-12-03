@@ -32,17 +32,11 @@ const ModelDetails = () => {
       }
     )
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         toast.success("Successfully Purchased");
-
-        // Realtime UI update
         setModel((prev) => ({ ...prev, purchased: prev.purchased + 1 }));
       })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Purchase Failed!");
-      });
+      .catch(() => toast.error("Purchase Failed!"));
   };
 
   const handleDelete = () => {
@@ -57,101 +51,90 @@ const ModelDetails = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(`https://ai-model-hub-server.vercel.app/models/${model._id}`, {
-          method: "Delete",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
         })
           .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            navigate("/all-model");
-          });
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
+          .then(() => navigate("/all-model"));
+
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
     });
   };
 
   return (
     <MyContainer>
-      <h1 className="text-center font-bold mt-10 text-3xl ">
-        MODEL <span className="text-purple-700">DETAILS</span>{" "}
+      <h1 className="text-center font-bold mt-10 text-3xl sm:text-4xl">
+        MODEL <span className="text-purple-700">DETAILS</span>
       </h1>
-      <div className="max-w-4xl mx-auto mt-10 p-8 bg-purple-50 shadow-xl rounded-2xl border border-gray-200">
+
+      <div className="max-w-4xl mx-auto mt-10 p-5 sm:p-8 bg-purple-50 shadow-xl rounded-2xl border border-gray-200">
         {/* TITLE */}
-        <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+        <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center sm:text-left">
           {model.name}
         </h1>
 
         {/* IMAGE */}
-        <div className="flex justify-center mb-8">
+        <div className="flex justify-center sm:justify-start mb-8">
           <img
             src={model.image}
             alt={model.name}
-            className="rounded-xl  bg-emerald-50 p-4 shadow-lg w-80 h-80 object-cover border border-gray-400 "
+            className="rounded-xl bg-emerald-50 p-4 shadow-lg w-full sm:w-80 h-64 sm:h-80 object-cover border border-gray-400"
           />
         </div>
 
         {/* DETAILS GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-gray-50 p-5 rounded-xl border shadow-sm">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          <div className="bg-gray-50 p-4 sm:p-5 rounded-xl border shadow-sm">
             <p className="text-gray-600 font-semibold">Framework:</p>
-            <p className="text-l font-bold text-blue-700">{model.framework}</p>
+            <p className="text-blue-700 font-bold">{model.framework}</p>
           </div>
 
-          <div className="bg-gray-50 p-5 rounded-xl border shadow-sm">
+          <div className="bg-gray-50 p-4 sm:p-5 rounded-xl border shadow-sm">
             <p className="text-gray-600 font-semibold">Use Case:</p>
-            <p className="text-l font-bold text-green-700">{model.useCase}</p>
+            <p className="text-green-700 font-bold">{model.useCase}</p>
           </div>
 
-          <div className="bg-gray-50 p-5 rounded-xl border shadow-sm">
+          <div className="bg-gray-50 p-4 sm:p-5 rounded-xl border shadow-sm">
             <p className="text-gray-600 font-semibold">Dataset:</p>
-            <p className="text-l font-bold text-purple-700">{model.dataset}</p>
+            <p className="text-purple-700 font-bold">{model.dataset}</p>
           </div>
 
-          <div className="bg-gray-50 p-5 rounded-xl border shadow-sm">
+          <div className="bg-gray-50 p-4 sm:p-5 rounded-xl border shadow-sm">
             <p className="text-gray-600 font-semibold">Purchased Count:</p>
-            <p className="text-l font-bold text-rose-700">
-              Purchased {model.purchased}{" "}
-              {model.purchased > 1 ? "times" : "time"}
+            <p className="text-rose-700 font-bold">
+              Purchased {model.purchased} {model.purchased > 1 ? "times" : "time"}
             </p>
           </div>
         </div>
 
         {/* DESCRIPTION */}
-        <div className="bg-gray-50 p-6 rounded-xl border shadow-sm mt-8">
-          <h2 className="text-xl font-semibold text-gray-800 mb-2">
-            Description
-          </h2>
+        <div className="bg-gray-50 p-4 sm:p-6 rounded-xl border shadow-sm mt-6">
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">Description</h2>
           <p className="text-gray-700 leading-relaxed">{model.description}</p>
         </div>
 
         {/* BOTTOM INFO */}
-        <div className="mt-6 flex flex-col md:flex-row justify-between text-gray-600 text-sm">
+        <div className="mt-6 flex flex-col sm:flex-row justify-between text-gray-600 text-sm gap-2 sm:gap-0">
           <p>
             <span className="font-semibold">Created At:</span>{" "}
             {new Date(model.createdAt).toLocaleDateString()}
           </p>
-
           <p>
             <span className="font-semibold">Created By:</span> {model.createdBy}
           </p>
         </div>
-        {/* Button */}
+
+        {/* BUTTONS */}
         {user?.email === model.createdBy && (
-          <div className="flex justify-between gap-4 mt-8">
-            <Link to={`/update-model/${model._id}`} className="card-btn">
+          <div className="flex flex-col sm:flex-row justify-start gap-4 mt-6">
+            <Link to={`/update-model/${model._id}`} className="card-btn w-full sm:w-auto text-center">
               Edit Model Details
             </Link>
-            <button onClick={handlePurchase} className="card-btn">
+            <button onClick={handlePurchase} className="card-btn w-full sm:w-auto">
               Purchase Model
             </button>
-
-            <button onClick={handleDelete} className="card-btn">
+            <button onClick={handleDelete} className="card-btn w-full sm:w-auto">
               Delete
             </button>
           </div>

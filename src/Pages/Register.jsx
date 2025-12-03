@@ -76,9 +76,9 @@ const Register = () => {
   };
 
   return (
-    <div className="card bg-base-100  w-full mx-auto max-w-sm shrink-0 shadow-2xl border border-gray-200">
+    <div className="card bg-base-100 m-10 w-full mx-auto max-w-sm shrink-0 shadow-2xl border border-gray-200">
       <MyContainer>
-        <div className="card-body mt-10">
+        <div className="card-body ">
           <h1 className="text-2xl font-bold text-center">
             <span className="text-purple-600">Register</span> for AI
             <span className="text-blue-500"> Model Inventory Manager</span>
@@ -121,7 +121,7 @@ const Register = () => {
                 />
                 <span
                   onClick={() => setShowPass(!showPass)}
-                  className="absolute right-[28px] top-[0px] cursor-pointer text-xl"
+                  className="absolute right-[28px] top-[30px] cursor-pointer text-xl"
                 >
                   {showPass ? <FaEye /> : <IoEyeOff />}
                 </span>

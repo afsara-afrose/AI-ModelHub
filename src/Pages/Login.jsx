@@ -63,7 +63,7 @@ const Login = () => {
   };
 
   return (
-    <div className="card bg-base-100 mt-10 w-full mx-auto max-w-sm shrink-0 shadow-2xl border border-gray-200">
+    <div className="card bg-base-100 m-10 w-full mx-auto max-w-sm shrink-0 shadow-2xl border border-gray-200">
       <div className="max-w-lg text-center lg:text-left p-5">
         <h1 className="text-2xl font-bold drop-shadow-lg text-center">
           <span className="text-purple-600"> Login </span>to AI{" "}

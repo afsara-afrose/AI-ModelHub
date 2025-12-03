@@ -71,7 +71,7 @@ const AllModel = () => {
           <option value="others">Others</option>
         </select>
 
-        <button className="btn my-btn rounded-full">
+        <button className="btn my-btn rounded-full w-full md:w-auto">
           {loading ? "Searching..." : "Search"}
         </button>
       </form>
