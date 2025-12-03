@@ -17,7 +17,9 @@ const MainLayout = () => {
         </MyContainer>
       </main>
 
-      <FooterSection />
+      <div className="mt-10">
+        <FooterSection />
+      </div>
     </div>
   );
 };

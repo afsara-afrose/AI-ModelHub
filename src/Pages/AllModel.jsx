@@ -76,7 +76,7 @@ const AllModel = () => {
         </button>
       </form>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 bg-purple-300 rounded-2xl p-10">
         {models.map((model) => (
           <ModelCard key={model._id} model={model} />
         ))}

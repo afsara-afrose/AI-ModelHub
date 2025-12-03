@@ -18,7 +18,7 @@ const Home = () => {
       </header>
 
       {/* Latest Models */}
-      <section className="px-4 md:px-16 mb-16">
+      <section className="px-4 md:px-16 mb-16 bg-fuchsia-300 rounded-2xl p-10">
         <h1 className="text-center text-3xl font-bold text-purple-700 mb-8">
           <span className="text-black">Latest </span> Models
         </h1>
@@ -64,7 +64,7 @@ const Home = () => {
         </div>
 
         {/* Center Text + Button */}
-        <div className="flex flex-col justify-center items-center mb-10 md:items-start text-center md:text-left px-4 md:px-0 mb-6 md:mb-0">
+        <div className="flex flex-col justify-center items-center m-10 md:items-start text-center md:text-left px-4 md:px-0 mb-6 md:mb-0">
           <h2 className="text-2xl sm:text-3xl font-bold text-black mb-4">
             Get <span className="text-blue-700">Started</span>
           </h2>

@@ -59,7 +59,7 @@ const AddModel = () => {
 
   return (
     <div className="max-w-3xl mx-auto mt-10 px-4 sm:px-6 lg:px-8">
-      <div className="card bg-base-100 border border-base-300 shadow-2xl rounded-2xl">
+      <div className="card bg-purple-300 border border-base-300 shadow-2xl rounded-2xl">
         <div className="card-body p-5">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6">
             Add New Model
@@ -132,7 +132,7 @@ const AddModel = () => {
               />
             </div>
 
-            <button type="submit" className="btn btn-primary w-full mt-3">
+            <button type="submit" className="my-btn p-2 w-full mt-3">
               ADD MODEL
             </button>
           </form>
